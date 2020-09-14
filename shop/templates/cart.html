@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% block body%}
+{% load static %}
+
+<section class='cart-section'>
+    <div class='container'>
+        <div class='row'>
+            <div class='col-lg-12'>
+                <div class='box-element'>
+                    <a class='btn btn-outline-dark' href='{% url "shop" %}'>&#x2190; Continue Shopping</a>
+
+                    <br><br>
+
+                    <table class='table'>
+                        <tr>
+                            <th><h5>Items: <strong>{{order.get_cart_items }}</strong></h5></th>
+                            <th><h5>Total: <strong>NGN {{order.get_cart_total}}</strong></h5></th>
+                            
+                            <th>
+                            {% if not request.user.is_authenticated %}
+                                <a href='{% url "checkout" %}' class='btn btn-success float-right {% if order.get_cart_items == 0 %}disabled{% endif %}'>Checkout as a Guest</a>
+                            {% else %}
+                                <a href='{% url "checkout" %}' class='btn btn-success float-right {% if order.get_cart_items == 0 %}disabled{% endif %}'>Checkout</a>
+                            {% endif %}
+                            </th>
+                        </tr>
+
+                    </table>
+                </div>
+
+                <br>
+
+                <div class='box-element'>
+                    <div class='cart-row'>
+                        <div style='flex:2' class='disappear'>
+                        </div>
+                        <div style='flex:2'>
+                            <strong>Item</strong>
+                        </div>
+                        <div style='flex:2'>
+                            <strong>Price</strong>
+                        </div>
+                        <div style='flex:2'>
+                            <strong>Qty</strong>
+                        </div>
+                        <div style='flex:1'>
+                            <strong>Total</strong>
+                        </div>
+                    </div>
+                    {% if items %}
+                        {% for item in items %}
+                        <div class='cart-row'>
+                            <div style='flex:2' class='disappear'>
+                                <img class='row-image' src="{{item.product.image.url}}">
+                            </div>
+                            <div style='flex:2'>
+                                {{item.product.name}}
+                            </div>
+                            <div style='flex:2'>
+                                NGN {{item.product.price}}
+                            </div>
+                            <div style='flex:2'>
+                                <p class='quantity'>{% if item.quantity > 0 %} {{item.quantity}} {% else %} 1 {% endif %}</p>
+                                <div class='quantity'>
+                                    <i class='chg-quantity fas fa-caret-up update-cart' data-product={{item.product.id}} data-action="add"></i>
+                                    <i class='chg-quantity fas fa-caret-down update-cart' data-product={{item.product.id}} data-action="remove"></i>
+                                </div>
+                            </div>
+                            <div style='flex:1' class='total'>
+                                <strong>{{ item.get_total}}</strong>
+                                <i class='fas fa-trash-alt text-danger update-cart' data-product={{item.product.id}} data-action="delete"></i>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div>
+                            <h6 class='text-muted text-center' style='padding:60px'>Your cart is empty</h6>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

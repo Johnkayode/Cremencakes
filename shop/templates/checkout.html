@@ -1,0 +1,211 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+{% load static %}
+<section class='checkout-section'>
+    <div class='container'>
+        <div class='row'>
+            <div class='col-lg-6 pb-3'>
+
+                <div class='box-element' id='form-wrapper'>
+                    <hr>
+                    <h4 class='text-center' style='color:grey'><b>Checkout</b></h4>
+                
+                    <form id='form'>
+                        <div id='user-info'>
+                            <hr>
+                            <p style='color:grey'><b>Personal details:</b></p>
+                            <hr>
+                            <div class='form-field'>
+                                <input required class='form-control' type='text' name='name' placeholder="Name..">
+                            </div>
+                            <div class='form-field'>
+                                <input required class='form-control' type='email' name='email' placeholder="Email..">
+                            </div>
+                        </div>
+                        <div id='shipping-info'>
+                            <hr>
+                            <p style='color:grey'><b>Shipping Information:</b></p>
+                            <hr>
+                            <div class='form-field'>
+                                <input required class='form-control' type='text' name='address' placeholder="Address..">
+                            </div>
+                            <div class='form-field'>
+                                <input required class='form-control' type='text' name='city' placeholder="City..">
+                            </div>
+                            <div class='form-field'>
+                                <input required class='form-control' type='text' name='state' placeholder="State..">
+                            </div>
+                            <div class='form-field'>
+                                <input required class='form-control' type='text' name='zipcode' placeholder="Zip code..">
+                            </div>
+                        </div>
+                        <hr>
+                        <input id='form-button' class='btn btn-success btn-block  {% if order.get_cart_items == 0 %}hidden{% endif %}' type='submit' value='Continue'>
+                        <!--id='form-button'-->
+                    </form>
+                    <div class='hidden' id='payment-info'>
+                        <!--<button id='make-payment' class='btn btn-success btn-block {% if order.get_cart_items == 0 %}hidden{% endif %}'>
+                            Pay With Credit Card </button>-->
+                        <div id="paypal-button-container"></div>
+                    </div>
+                </div>
+                
+            </div>
+            <br>
+            <br>
+            <div class='col-lg-6 pb-3'>
+                <div class='box-element'>
+                    <a class='btn btn-outline-dark' href='{% url "cart" %}'>&#x2190; Back to Cart</a>
+
+                    <hr>
+                    <h4 class='text-center' style='color:grey'><b>Order Summary</b></h4>
+                    <hr>
+                    {% if items %}
+                        {% for item in items %}
+                            <div class='cart-row'>
+                                <div style='flex:2' class='disappear'>
+                                    <img class='row-image' src="{{item.product.image.url}}">
+                                </div>
+                                <div style='flex:2'>
+                                    <p>{{item.product.name}}</p>
+                                </div>
+                                <div style='flex:1'>
+                                    <p>NGN {{item.product.price}}</p>
+                                </div>
+                                <div style='flex:1'>
+                                    <p>{{item.quantity}}</p>
+                                </div>
+                                <div style='flex:1'>
+                                    <p>{{item.get_total}}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <h5 style='color:grey'>Items: {{order.get_cart_items }}</h5>
+                    <h5 style='color:grey'>Total: NGN {{order.get_cart_total}}</h5>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<script src="https://www.paypal.com/sdk/js?client-id=AWNE5Qq7kKdQBU_wE-RjM907YOLxHEpDs2RONCVJWt_6rgc62gkVFIBvgioJMwV2d2CbotbhEGak47KS"></script>
+<script>
+    var total = '{{ order.get_cart_total }}'
+    paypal.Buttons({
+
+        style:{
+            color:'blue'
+        },
+
+        createOrder: function(data, actions) {
+            // This function sets up the details of the transaction, including the amount and line item details.
+            return actions.order.create({
+            purchase_units: [{
+                amount: {
+                value: parseFloat(total).toFixed(2)
+                }
+            }]
+            });
+        },
+        onApprove: function(data, actions) {
+            // This function captures the funds from the transaction.
+            return actions.order.capture().then(function(details) {
+            // This function shows a transaction success message to your buyer.
+            submitFormData();
+        });
+        }
+        }).render('#paypal-button-container');
+        //This function displays Smart Payment Buttons on your web page.
+</script>
+ 
+<script>
+    var user= '{{request.user}}'
+    var total = '{{ order.get_cart_total }}'
+
+    if (user!='AnonymousUser'){
+        document.getElementById('user-info').innerHTML = ''
+    }
+    var form = document.getElementById('form');
+    form.addEventListener('submit', function(e){
+        e.preventDefault();
+        console.log('Form submitted...');
+        document.getElementById('form-button').classList.add('hidden');
+        document.getElementById('payment-info').classList.remove('hidden');
+        
+    })
+
+    /*document.getElementById('make-payment').addEventListener('click', function(e){
+        submitFormData();
+    } )*/
+    function getCookie(name){
+            var cookieArr = document.cookie.split(";");
+            for(var i = 0; i < cookieArr.length; i++){
+                var cookiePair = cookieArr[i].split("=");
+
+                if(name == cookiePair[0].trim()){
+                    return decodeURIComponent(cookiePair[1]);
+                }
+            }
+
+            return null;
+        }
+    
+    function submitFormData(){
+        console.log('Payment button clicked')
+        var csrftoken = getToken('csrftoken');
+        console.log(csrftoken)
+
+        var userFormData = {
+            'name':null,
+            'email':null,
+            'total': total,
+        };
+
+        var shippingInfo = {
+            'address':null,
+            'city':null,
+            'state':null,
+            'zipcode':null,
+        };
+
+        shippingInfo.address = form.address.value
+        shippingInfo.city = form.city.value
+        shippingInfo.state = form.state.value
+        shippingInfo.zipcode = form.zipcode.value
+
+        if (user=='AnonymousUser'){
+            userFormData.name = form.name.value
+            userFormData.email = form.email.value
+        }
+
+
+        var url = '/checkout/process-order/'
+
+        fetch(url, {
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+            body:JSON.stringify({'user-info':userFormData, 'shipping-info':shippingInfo}),
+            credentials: 'include'
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            console.log('Success',data);
+            alert('Transaction completed');
+
+            cart = {}
+            document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+            window.location.href = "{% url 'shop' %}"
+        });
+
+    }
+</script>
+
+{% endblock %}

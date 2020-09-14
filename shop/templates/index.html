@@ -1,0 +1,526 @@
+{% extends 'layout.html' %}
+
+
+
+{% block body %}
+    {% load static %}
+    <section class='home-section' style='width: 100%;' id='home'>
+        <div class='bg-shapes'>
+            <div></div>
+        </div>
+        <div class='container'>
+            <div class='row'>
+                <div class='col-lg-6'>
+                    <div class='home-content'>
+                        <h1>Shop cakes online for as low as 5000 Naira</h1>
+                        <p>Creme n' Cakes offer you the best cakes and chocolates at affordable prices,
+                            with swift delivery services in Lagos and Abuja.
+                        </p>
+                        <a href='' class='btn mybtn1' id='home-btn'>Shop Now</a>
+                    </div>
+                </div>
+                <div class='col-lg-6 '>
+                    <div class='home-img'>
+                        <img src=" {% static 'images/cake01.png'%} ">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <!--About Section-->
+    <section class='about-section' id='about'> 
+        <div class='container'>
+            <div class='row'>
+                <div class='col-lg-6 d-flex'>
+                    <div class='about-img'>
+                        <img class='img-fluid' src="{% static 'images/birthday-cake-png.png' %}" alt='product'>
+                    </div>
+                </div>
+                <div class='col-lg'>
+                    <div class='section-title' id='about-titles'>
+                        <h1 class='title'>About Creme n' Cakes</h1>
+                        <h2 class='subtitle'>Rebranding the cake culture..</h2>
+                    </div>
+                    <div class='about-content'>
+                        <p>
+                            The Creme n' Cakes Bakeries started off in 2018 by Mrs. Omoni Craig with
+                            its main branch in Allen Avenue, Ikeja. Over the years, Creme n' Cakes has grown
+                            larger with over 10 branches in Lagos and Abuja.<br>
+                            Our aim at Creme n' Cakes is to deliver the best of cake delicacies to your footstep.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Feature Section-->
+    <section class='features-section ' id='features'>
+        <div class='container'>
+            <div class='row justify-content-center'>
+                <div class='col-lg-7'>
+                    <div class='section-title'>
+                        <center><h1 class='title '>Features</h1></center>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-6 col-lg-4 d-flex'>
+                    <div class='features-item col-lg-12'>
+                        <div class='icon'>
+                            <i class='fas fa-bicycle'></i>
+                        </div>
+                        <h3>Fast Delivery</h3>
+                        <p>Maximum of 4 hours after taking orders, Creme n' Cakes deliver your package
+                            to your footstep. 
+                        </p>
+                    </div>
+                </div>
+                <div class='col-md-6 col-lg-4 d-flex'>
+                    <div class='features-item col-lg-12'>
+                        <div class='icon'>
+                            <i class='fas fa-comments'></i>
+                        </div>
+                        <h3>24/7 Customer Service</h3>
+                        <p>At Creme n' Cakes, we are concerned about the way our customers are treated and 
+                            we attend to all complaints quickly.
+                        </p>
+                    </div>
+                </div>
+                <div class='col-md-6 col-lg-4 d-flex'>
+                    <div class='features-item col-lg-12'>
+                        <div class='icon'>
+                            <i class='fas fa-birthday-cake'></i>
+                        </div>
+                        <h3>Quality and Affordable</h3>
+                        <p>Creme n' Cakes deliver quality food and at the same time, we make sure they are 
+                            pocket-friendly.
+                        </p>
+                    </div>
+                </div>
+                <div class='col-md-6 col-lg-4 d-flex'>
+                    <div class='features-item col-lg-12'>
+                        <div class='icon'>
+                            <i class='fas fa-map-marker-alt'></i>
+                        </div>
+                        <h3>Free Delivery Services</h3>
+                        <p>Ikeja, Lagos and Gwagalada, Abuja environs enjoy free delivery services while other
+                            areas are required to pay a little fee depending on the area.
+                        </p>
+                    </div>
+                </div>
+                <div class='col-md-6 col-lg-4 d-flex'>
+                    <div class='features-item col-lg-12'>
+                        <div class='icon'>
+                            <i class='fas fa-credit-card'></i>
+                        </div>
+                        <h3>Discount</h3>
+                        <p>At Creme n' Cakes, we honour our customers' birthdays and offer them a 20% discount
+                            on birthday cakes.
+                        </p>
+                    </div>
+                </div>
+                <div class='col-md-6 col-lg-4 d-flex'>
+                    <div class=' col-lg-12 features-item'>
+                        <div class='icon'>
+                            <i class='fas fa-money-bill'></i>
+                        </div>
+                        <h3>No Refunds</h3>
+                        <p>However, Creme n' Cakes do not give refunds to customers upon error in any purchase
+                            made.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!---Best Sellers-->
+    <section class='products-section' >
+        <div class='container'>
+            <div class='row justify-content-center'>
+                <div class='col-lg-7'>
+                    <div class='section-title'>
+                        <center><h1 class='title'>Our Bestsellers</h1></center>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class='owl-carousel' id='product-carousel'>
+                    
+                    <div class='col-lg-12 d-flex justify-content-center'>
+                        <div class='products-item '>
+                            <div class='product-image'>
+                                <img class='img-fluid' src="{% static 'images/roundcake.jpg' %}" style='height:250px; width: 300px'>
+                                <div class='overlay d-flex'>
+                                    <a href="#" class='btn mybtn1'>Add to Cart</a>
+                                </div>
+                            </div>
+                            
+                            <div class='product-content'>
+                                <div class='product-price'>
+                                    <span class='new-price'>NGN 4800</span>
+                                    <span class='old-price'>NGN 6000</span>
+                                </div>
+                                <h5 class='product-name'>10" Round Cake</h5>
+                                <h6 class='product-category'>Cakes</h6>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class='col-lg-12  d-flex justify-content-center'>
+                        <div class='products-item '>
+                            <div class='product-image'>
+                                <img class='img-fluid' src="{% static 'images/Cookies-n-Cream-cream-b.jpg'%}" style='height:250px; width: 300px'>
+                                <div class='overlay d-flex'>
+                                    <a href="#" class='btn mybtn1'>Add to Cart</a>
+                                </div>
+                            </div>
+                            
+                            <div class='product-content'>
+                                <div class='product-price'>
+                                    <span class='new-price'>NGN 4500</span>
+                                    <span class='old-price'>NGN 5000</span>
+                                </div>
+                                <h5 class='product-name'>Cookies and Cream</h5>
+                                <h6 class='product-category'>Cakes</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-lg-12 d-flex justify-content-center'>
+                        <div class='products-item '>
+                            <div class='product-image'>
+                                <img class='img-fluid' src="{% static 'images/Minnie-cream-b.jpg' %}" style='height:250px; width: 300px'>
+                                <div class='overlay d-flex'>
+                                    <a href="#" class='btn mybtn1'>Add to Cart</a>
+                                </div>
+                            </div>
+                            
+                            <div class='product-content'>
+                                <div class='product-price'>
+                                    <span class='new-price'>NGN 4500</span>
+                                    <span class='old-price'>NGN 5000</span>
+                                </div>
+                                <h5 class='product-name'>Minnie Cake</h5>
+                                <h6 class='product-category'>Cakes</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-lg-12 d-flex justify-content-center'>
+                        <div class='products-item '>
+                            <div class='product-image '>
+                                <img class='img-fluid' src=" {% static 'images/croissant.webp' %}" style='height:250px; width: 300px'>
+                                <div class='overlay d-flex'>
+                                    <a href="#" class='btn mybtn1'>Add to Cart</a>
+                                </div>
+                            </div>
+                            
+                            <div class='product-content'>
+                                <div class='product-price'>
+                                    <span class='new-price'>NGN 2000</span>
+                                    <span class='old-price'>NGN 2500</span>
+                                </div>
+                                <h5 class='product-name'>Croissants</h5>
+                                <h6 class='product-category'>Pastries</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-lg-12 d-flex justify-content-center'>
+                        <div class='products-item '>
+                            <div class='product-image '>
+                                <img class='img-fluid' src=" {% static 'images/burger-home.jpg.webp' %}" style='height:250px; width: 300px'>
+                                <div class='overlay d-flex'>
+                                    <a href="#" class='btn mybtn1'>Add to Cart</a>
+                                </div>
+                            </div>
+                            
+                            <div class='product-content'>
+                                <div class='product-price'>
+                                    <span class='new-price'>NGN 1500</span>
+                                    <span class='old-price'>NGN 1750</span>
+                                </div>
+                                <h5 class='product-name'>Veggie Burgers</h5>
+                                <h6 class='product-category'>Pastries</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Testimonial Section-->
+    <section class='testimonial-section' id='testimonial'>
+        <div class='container'>
+            <div class='row justify-content-center'>
+                <div class='col-lg-7'>
+                    <div class='section-title'>
+                        <center><h1 class='title'>Testimonial</h1><br>
+                            <h3 class='subtitle text-light'>Our Satisfied Customers' Feedback</h3></center>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='owl-carousel' id='testimonial-carousel'>
+                    <div class='col-lg-12'>
+                        <div class='testimonial-item'>
+                            <div class='testimonial-comment'>
+                                <p>
+                                    <i class='fas fa-quote-left'></i>
+                                    Very good cakes and food generally
+                                    <i class='fas fa-quote-right'></i>
+                                </p>
+                                <ul class='stars list-unstyled'>
+                                    <li><i class='fas fa-star'></i></li>
+                                    <li><i class='fas fa-star'></i></li>
+                                    <li><i class='fas fa-star'></i></li>
+                                    <li><i class='fas fa-star'></i></li>
+                                    <li><i class='far fa-star'></i></li>
+                                </ul>
+                            </div>
+                            <div class='client-info'>
+                                <img src=" {% static 'images/testimonial/1.jpg' %}" alt='client'>
+                                <h5>Adeyinka George</h5>
+                                <p>CEO Adein Autos</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-lg-12'>
+                        <div class='testimonial-item'>
+                            <div class='testimonial-comment'>
+                                <p>
+                                    <i class='fas fa-quote-left'></i>
+                                    All staff members of my company eat lunch from Creme and Cakes
+                                    <i class='fas fa-quote-right'></i>
+                                </p>
+                                <ul class='stars list-unstyled'>
+                                    <li><i class='fas fa-star'></i></li>
+                                    <li><i class='fas fa-star'></i></li>
+                                    <li><i class='fas fa-star'></i></li>
+                                    <li><i class='fas fa-star'></i></li>
+                                    <li><i class='fas fa-star-half-alt'></i></li>
+                                </ul>
+                            </div>
+                            <div class='client-info'>
+                                <img src=" {% static 'images/testimonial/2.jpg' %}" alt='client'>
+                                <h5>Sara Ngige</h5>
+                                <p>Director, GoCode Inc.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-lg-12'>
+                        <div class='testimonial-item'>
+                            <div class='testimonial-comment'>
+                                <p>
+                                    <i class='fas fa-quote-left'></i>
+                                    Very good cakes and food generally
+                                    <i class='fas fa-quote-right'></i>
+                                </p>
+                                <ul class='stars list-unstyled'>
+                                    <li><i class='fas fa-star'></i></li>
+                                    <li><i class='fas fa-star'></i></li>
+                                    <li><i class='fas fa-star'></i></li>
+                                    <li><i class='fas fa-star'></i></li>
+                                    <li><i class='fas fa-star-half-alt'></i></li>
+                                </ul>
+                            </div>
+                            <div class='client-info'>
+                                <img src="{% static 'images/testimonial/3.jpg' %}" alt='client'>
+                                <h5>Maluu Kareem</h5>
+                                <p>Businessman</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--- Faq Section-->
+    <section class='faq-section' id='faq'>
+        <div class='container'>
+            <div class='row justify-content-center'>
+                <div class='col-lg-7'>
+                    <div class='section-title'>
+                        <center>
+                            <h1 class='title'>Faq</h1><br>
+                            <h3 class='subtitle'>Frequently Asked Questions</h3>
+                        </center>
+                    </div>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-6'>
+                    <div class='faq-item'>
+                        <h4>How much do you charge for specialty, sculpted or novelty cakes?</h4>
+                        <p>Prices vary depending on size and complexity of the design. 
+                            For specialty or novelty cakes, 
+                            <a href="https:wa.me/2349034727466?text=Hello%20Creme%20n'%20Cakes">please contact us on WhatsApp
+                                for a price quote.</a> </p>
+                    </div>
+                </div>
+                <div class='col-md-6'>
+                    <div class='faq-item'>
+                        <h4>Where do you deliver your cakes, cookies or cupcakes</h4>
+                        <p>We do offer delivery services pending availability. We generally deliver to areas within Lagos 
+                            and Abuja only. The delivery charges vary based on the location we are delivering to.
+                        </p>
+                    </div>
+                </div>
+                <div class='col-md-6'>
+                    <div class='faq-item'>
+                        <h4>Your cakes are beautiful, but do they taste good too?</h4>
+                        <p>At Creme N' Cakes, we make all our cakes, cookies, bread and pastries to order. Meaning, we're
+                            baking them when you order them. We only use fresh ingredients, including real butter, milk,
+                            flour, sugar and eggs! This means our cakes not only look beautiful, but they also taste delicious.
+                        </p>
+                    </div>
+                </div>
+                <div class='col-md-6'>
+                    <div class='faq-item'>
+                        <h4>Can i supply my own cake design ideas?</h4>
+                        <p>Yes absolutely! We need to work together to incorporate your style and tastes into your order. 
+                            We work individually with each client to ensure your cake, cupcakes or cookies are tailored
+                            for your event.
+                        </p>
+                    </div>
+                </div>
+                <div class='col-md-6'>
+                    <div class='faq-item'>
+                        <h4>How far in advance should I place my order?</h4>
+                        <p>Orders should be placed at least one day in advance...but if you have a short notice order, ask us, and
+                            we'll try to get it done for you if possible. We ask that you give us at least 2 to 3 weeks notice on specialty
+                            cake orders.
+                        </p>
+                    </div>
+                </div>
+                <div class='col-md-6'>
+                    <div class='faq-item'>
+                        <h4>Can I pick up my order at the store? Where are you located</h4>
+                        <p>Yes, you can always pick up your order within the opening hours of the store you are picking up from. We
+                            are located at:<br>
+                            1. 33, Allen Avenue, Ikeja, Lagos.<br>
+                            2. The Hive, Plot 16, Kuboye Street, Oniru, Lagos.<br>
+                            3. Creme n' Cakes, Circles Mall, Gwagalada, Abuja.
+                        </p>
+                    </div>
+                </div>
+
+                <div class='col-lg-12'>
+                    <p class='support-text text-center'>Any Questions? <a href='#'>support@cremencakes.com</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class='newsletter-section'>
+        <div class='container'>
+            <div class='row justify-content-center'>
+                <div class='col-lg-7'>
+                    <div class='section-title'>
+                        <center><h1 class='title'>Newsletter</h1><br>
+                            <h3 class='subtitle text-light'>Subscribe To Our Newsletters</h3></center>
+                    </div>
+                </div>
+            </div>
+            <div class='row justify-content-center'>
+                <div class='col-md-10 col-lg-7'>
+                    <form class='newsletter-form'>
+                        <div class='form-group'>
+                            <input type='text' class='form-control' placeholder="Enter Your Email">
+                        </div>
+                        <button type='submit' class='btn mybtn2'>
+                            <span>Subscribe</span>
+                            <i class=' fas fa-paper-plane'></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section-->
+    <section class='contact-section' id='contact'>
+        <div class='container'>
+            <div class='row justify-content-center'>
+                <div class='col-lg-7'>
+                    <div class='section-title'>
+                        <center><h1 class='title'>Contact Us</h1></center>
+                    </div>
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-7'>
+                   <form class='contact-form'>
+                        <div class='row'>
+                            <div class='col-md-6'>
+                                <div class='form-group'>
+                                    <input type="text" placeholder="Your Name" class='form-control'>
+                                </div>
+                            </div>
+                            <div class='col-md-6'>
+                                <div class='form-group'>
+                                    <input type="text" placeholder="Your Email" class='form-control'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-12'>
+                                <div class='form-group'>
+                                    <input type="text" placeholder="Subject" class='form-control'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-12'>
+                                <div class='form-group'>
+                                    <textarea class='form-control' placeholder="Message"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-12'>
+                                <div class='form-group'>
+                                    <button type='submit' class='btn mybtn2'>Send Message</button>
+                                </div>
+                            </div>
+                        </div>
+                   </form>
+                </div>
+                <div class='col-md-5 order-first order-md-last'>
+                    <div class='contact-item'>
+                        <div class='icon'>
+                            <i class='fas fa-map-marker-alt'></i>
+                        </div>
+                        <h5>Main Branch</h5>
+                        <p>33, Allen Avenue, Ikeja, Lagos.</p>
+                    </div>
+                    <div class='contact-item'>
+                        <div class='icon'>
+                            <i class='fas fa-envelope'></i>
+                        </div>
+                        <h5>Email</h5>
+                        <p>support@cremencakes.com</p>
+                    </div>
+                    <div class='contact-item'>
+                        <div class='icon'>
+                            <i class='fas fa-phone'></i>
+                        </div>
+                        <h5>Call Us On</h5>
+                        <p>+234 903 472 7466</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     
+    
+
+    
+{% endblock %}
+
+    

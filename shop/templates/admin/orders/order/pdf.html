@@ -1,0 +1,109 @@
+
+    
+
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+   
+    
+    
+</head>
+
+<body>
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="4">
+                    <table>
+                        <tr>
+                            <td >
+                               <h1 style='color: #c41e1e; font-size: 18px; margin-bottom: 3px;'>Creme n' Cakes<br>Bakeries<br></h1>
+                                
+                            </td>
+                            
+                            <td style='font-size: 15px;'>
+                                Date: {{order.date_ordered}}<br>
+                                Transaction ID: {{order.transaction_id}}<br>
+                                Order ID: {{order.id}}
+                                
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <tr class="information">
+                <td>
+                    <table>
+                        <tr>
+                            <td style='font-size: 9px'>
+                                33 Allen Avenue<br>
+                                Ikeja, Lagos.
+                            </td>
+                            
+                            
+                        </tr>
+                        <tr style='font-size: 10px; padding-top: 10px;padding-bottom: 10px;'>
+                            <td>{% if order.customer.user %}
+                                    <strong>Billed To: </strong>{{order.customer.user.first_name}} {{order.customer.user.last_name}}
+                                {% else %}
+                                    <strong>Billed To: </strong>{{ order.customer.name }}
+                                {% endif %}
+                            <br>
+                             <strong>Email: </strong>{{order.customer.email}}
+                             <br>
+                             <strong>Shipping Address: </strong>{% for shipping_address in order.shippingaddress_set.all %}
+                             {{ shipping_address.address }}, {{ shipping_address.city}} {{ shipping_address.state}}.
+                             {% endfor %}
+                             </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <br><br><br>
+            
+            <tr style='background-color: #ddd; margin-bottom:5px; padding:3px;'>
+                <td>
+                    <strong>Item</strong>
+                </td>
+                
+                <td>
+                    <strong>Price</strong>
+                </td>
+                <td>
+                    <strong>Quantity</strong>
+                </td>
+                <td>
+                    <strong>Total</strong>
+                </td>
+            </tr>
+            
+            
+            {% for item in order.orderitem_set.all %}
+            <tr class='item' style='padding:5px;'>
+                <td>{{item.product.name}}</td>
+                <td>NGN {{item.product.price}}</td>
+                <td>{{item.quantity}}</td>
+                <td>NGN {{item.get_total }}</td>
+            </tr>
+            {% endfor %}
+            <div style='margin: 20px;'></div>
+           
+            <tr class="total">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                   <strong>Total: NGN {{order.get_cart_total}}</strong>
+                </td>
+            </tr>
+        </table>
+
+
+       
+    </div>
+</body>
+</html>

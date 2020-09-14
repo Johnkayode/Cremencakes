@@ -1,0 +1,125 @@
+{% extends 'layout.html'%}
+
+{% block body %}
+{% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;600&display=swap" rel="stylesheet">
+<script src="{% static 'js/app.js' %}"></script>
+<link rel='stylesheet' href="{%static 'css/main.css'%}">
+
+
+    <!-- ACCOUNT PAGE -->
+
+    <section class="registration-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 image-disappear">
+                    <img src="{%static 'images/cakedelivery.png'%}" style='width:550px;'>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-container register">
+                        
+                        <form id="" action="{% url 'register' %}" method='POST' >
+                            {% if user_form.errors %}
+                                
+                                <small class='text-danger'>Username/Email already exists</small>
+                            {% else %}
+                                <h3 class='text-muted' style='font-family:sans-serif; font-weight: 600;'>Become Our Customer</h3>
+                            {% endif %}
+                                <div class='input-group '>
+                                    
+                                    {{ user_form.username}}
+                                </div>
+                                <div class='input-group '>
+                                    
+                                    {{ user_form.first_name}}
+                                </div>
+                                <div class='input-group '>
+                                    
+                                    {{ user_form.last_name}}
+                                </div>
+                                <div class='input-group '>
+                                    
+                                    {{ user_form.email}}
+                                </div>
+                                
+                                <div class='input-group '>
+                                    <div class='input-group-prepend pass h'>
+                                        <div class='input-group-text'>
+                                            <i class='fas fa-eye' onclick='seePassWord()'></i>
+                                        </div>
+                                    </div>
+                                    {{ user_form.password}}
+                                </div>
+                                <div class='input-group '>
+                                    <div class='input-group-prepend pass h'>
+                                        <div class='input-group-text'>
+                                            <i class='fas fa-eye' onclick='seePassWord2()'></i>
+                                        </div>
+                                    </div>
+                                    {{ user_form.password_}}
+                                    <div class='invalid-feedback hidden' id='no-match'>
+                                        <span style='font-size: x-small;'>Password do not match</span>
+                                    </div>
+                                </div>
+
+                                {% csrf_token %}
+                                
+                                <br>
+                                <input type='hidden' name='next' value="{{ next }}" />
+                                <button type="submit" class="btn btn-success btn-block reg-btn" style='font-size:large'>SIGN UP</button>
+                                <div style='font-size: 18px; margin-top: 25px;'>
+                                    <small class='text-muted'>Already have an account? <a href="{% url 'login'%}" style='font-size: 18px;'>Log in</a></small>
+                                </div>
+                        
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function seePassWord(){
+            var password_ = document.getElementById('id_password');
+            console.log(password_.type)
+            if (password_.type === 'password'){
+                console.log('yes')
+                password_.type = 'text';
+            }else{
+                password_.type = 'password';
+            }
+        }
+        function seePassWord2(){
+            var password_ = document.getElementById('id_password_');
+            console.log(password_.type)
+            if (password_.type === 'password'){
+                console.log('yes')
+                password_.type = 'text';
+            }else{
+                password_.type = 'password';
+            }
+        };
+
+        var password = document.getElementById('id_password_');
+        console.log(password)
+
+        password.addEventListener('keyup', function(e){
+            var pass = document.getElementById('id_password').value;
+            var pass_ = document.getElementById('id_password_').value;
+            if (pass != pass_){
+                
+                document.getElementById('no-match').classList.remove('hidden');
+                document.getElementById('id_password_').classList.add('is-invalid')
+
+            }else{
+                document.getElementById('no-match').classList.add('hidden');
+                document.getElementById('id_password_').classList.remove('is-invalid')
+            }
+        })
+    
+
+
+       
+    </script>
+
+{% endblock %}

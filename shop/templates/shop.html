@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+{% load static %}
+<section class='products-section' style='width: 100%;' id='home'>
+    
+    <div class='container'>
+    <div class='row'>
+        <div class='col-lg-1'>
+            <div style='padding:20px;'>
+                <h3 class='text-center text-muted'>Categories</h3>
+                <ul class='list-unstyled text-center'>
+                    <li><a href="{% url 'shop' %}" {% if not category %}class='selected'{% endif %}>All</a></li>
+                    {% for c in categories %}
+                    <li><a href='{{ c.get_absolute_url }}' {% if category.slug == c.slug %}class='selected' {% endif %}>{{c.name}}</a></li>
+                    {% endfor %}
+                    
+                </ul>
+            </div>
+        </div>
+        <div class='col-lg-11 order-first'>
+            <div class='row'>
+                {% if products %}
+                    {% for product in products %}
+                        {% if product.quantity_available > 0%}
+                            <div class='col-lg-3 d-flex justify-content-center'>
+                                <div class='products-item '>
+                                    <div class='product-image'>
+                                        {% if product.image %}
+                                        <img class='img-fluid' src="{{ product.image.url }}" style='height:250px; width: 300px'>
+                                        {% else %}
+                                        <img class='img-fluid' src="{%static 'images/minnie.jpg'%} " style='height:250px; width: 300px'>
+                                        {% endif %}
+                                        <div class='overlay d-flex'>
+                                            <a  class='btn mybtn1 update-cart' data-product={{product.id}} data-action="add">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class='product-content'>
+                                        <div class='product-price'>
+                                            {% if product.discount_price %}
+                                            <span class='new-price'>NGN {{ product.discount_price|floatformat:0 }}</span>
+                                            <span class='old-price'>NGN {{ product.price|floatformat:0 }}</span>
+                                            {% else %}
+                                            <span class='new-price'>NGN {{ product.price|floatformat:0 }}</span>
+                                            {% endif %}
+                                        </div>
+                                        <a href='{{product.get_absolute_url}}'><h5 class='product-name'>{{product.name}}</h5></a>
+                                        <h6 class='product-category'>{{ product.category }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <div class='products-section'>
+                        <p class='text-center text-muted'>No Products available</p>
+                    </div>
+                {% endif %}
+                
+            </div>
+        </div>
+    </div>
+    </div>
+        </div>
+    </div>
+    <div class='overflow-hidden'>
+    {% include "pagination.html" with page=products %}
+    </div>
+</section>
+
+
+{% endblock %}

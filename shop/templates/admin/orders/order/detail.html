@@ -1,0 +1,88 @@
+{% extends 'admin/base_site.html' %}
+
+{% block branding %}
+<h1 id='site-name'>Creme n Cakes Admin Dashboard</h1>
+{% endblock %}
+
+{% block title %}
+Order {{order.id}} {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class='breadcrumbs'>
+    <a href="{% url 'admin:index' %}">Home</a> &rsaquo;
+    <a href="/myadmin/shop">Shop</a> &rsaquo;
+    <a href="/myadmin/shop/order">Orders</a> &rsaquo;
+    <a href="/myadmin/shop/order/{{order.id}}/change/">{{ order.id }}</a> &rsaquo; Detail
+</div>
+{% endblock %}
+
+{% block content %}
+<h1>Order {{order.id}}</h1>
+<ul class='object-tools'>
+    <li>
+        <a href='#' onclick="window.print();">Print Order</a>
+    </li>
+</ul>
+<table>
+    <tr>
+        <th>Date Ordered:</th>
+        <td>{{ order.date_ordered }}</td>
+    </tr>
+    <tr>
+        <th>Customer:</th>
+        <td>{{order.customer.name}}</td>
+    </tr>
+    <tr>
+        <th>E-mail:</th>
+        <td>{{order.customer.email}}</td>
+    </tr>    
+    <tr>
+        <th>Shipping Address:</th>
+        {% for shipping_address in order.shippingaddress_set.all %}
+        <td>{{ shipping_address.address }}, {{ shipping_address.city}} {{ shipping_address.state}}</td>
+        {% endfor %}
+    </tr>
+    <tr>
+        <th>Total Amount:</th>
+        <td>{{order.get_cart_total}}</td>
+    </tr>
+    <tr>
+        <th>Transaction ID:</th>
+        <td>{{order.transaction_id}}</td>
+    </tr>
+    <tr>
+        <th>Complete:</th>
+        <td>{{order.complete}}</td>
+    </tr>    
+</table>
+<br>
+<div class='module'>
+    <h2>Items</h2>
+    <table style="width:100%;">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.orderitem_set.all %}
+            <tr class="row {% cycle '1' '2' %}">
+                <td class='num'>{{item.product.name}}</td>
+                <td class='num'>NGN {{item.product.price}}</td>
+                <td class='num'>{{item.quantity}}</td>
+                <td class='num'>NGN {{item.get_total }}</td>
+            </tr>
+            {% endfor %}
+            <tr class="total">
+                <td colspan="3"><h2>Total</h2></td>
+                <td class='num'><h2>NGN {{order.get_cart_total}}</h2></td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+{% endblock %}

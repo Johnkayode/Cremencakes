@@ -1,0 +1,14 @@
+{% extends 'layout.html'%}
+{% block body %}
+<section class='registration-section'>
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-white">
+        <div class="col-lg-7  p-lg-5 mx-auto my-5">
+          <h2 class="display-4 font-weight-normal">Hi {{first_name}}, You have successfully registered
+              <i class='fas fa-check' style='color:rgb(20, 119, 20)'></i></h2>
+          <p class=" lead font-weight-bolder " >You can now Log In</p>
+          <a class="btn btn-outline-success" href="{% url 'login'%}">LOG IN</a>
+        </div>
+      </div>
+</section>
+
+{% endblock %}
