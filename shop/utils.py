@@ -3,7 +3,8 @@ from .models import *
 from io import BytesIO
 from django.http import HttpResponse
 from django.template.loader import get_template
-from xhtml2pdf import pisa
+from xhtml2pdf import pisa 
+
 
 
 def cookieCart(request):
@@ -74,7 +75,7 @@ def guestOrder(request, data):
 
     order = Order.objects.create(
         customer = customer,
-        complete = False
+        paid = False
     )
 
     ShippingAddress.objects.create(customer=customer, 

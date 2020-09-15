@@ -148,103 +148,35 @@
             </div>
             <div class="row">
                 <div class='owl-carousel' id='product-carousel'>
+                    {% for product in products %}
                     
-                    <div class='col-lg-12 d-flex justify-content-center'>
-                        <div class='products-item '>
-                            <div class='product-image'>
-                                <img class='img-fluid' src="{% static 'images/roundcake.jpg' %}" style='height:250px; width: 300px'>
-                                <div class='overlay d-flex'>
-                                    <a href="#" class='btn mybtn1'>Add to Cart</a>
+                            <div class='col-lg-12 d-flex justify-content-center'>
+                                <div class='products-item '>
+                                    <div class='product-image'>
+                                        {% if product.image %}
+                                        <img class='img-fluid' src="{{product.image.url}}" style='height:250px; width: 300px'>
+                                        {% else %}
+                                        <img class='img-fluid' src="{%static 'images/minnie.jpg'%} " class='product-image'>
+                                        {% endif %}
+                                        
+                                        <div class='overlay d-flex'>
+                                            <a  class='btn mybtn1 update-cart' style='color: #d70d25' data-product={{product.id}} data-action="add">Add to Cart</a>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class='product-content'>
+                                        <div class='product-price'>
+                                            <span class='new-price'>NGN {{product.price}}</span>
+                                            
+                                        </div>
+                                        <a href='{{product.get_absolute_url}}'><h5 class='product-name'>{{product.name}}</h5></a>
+                                        <h6 class='product-category'>{{product.category}}</h6>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            <div class='product-content'>
-                                <div class='product-price'>
-                                    <span class='new-price'>NGN 4800</span>
-                                    <span class='old-price'>NGN 6000</span>
-                                </div>
-                                <h5 class='product-name'>10" Round Cake</h5>
-                                <h6 class='product-category'>Cakes</h6>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div class='col-lg-12  d-flex justify-content-center'>
-                        <div class='products-item '>
-                            <div class='product-image'>
-                                <img class='img-fluid' src="{% static 'images/Cookies-n-Cream-cream-b.jpg'%}" style='height:250px; width: 300px'>
-                                <div class='overlay d-flex'>
-                                    <a href="#" class='btn mybtn1'>Add to Cart</a>
-                                </div>
-                            </div>
-                            
-                            <div class='product-content'>
-                                <div class='product-price'>
-                                    <span class='new-price'>NGN 4500</span>
-                                    <span class='old-price'>NGN 5000</span>
-                                </div>
-                                <h5 class='product-name'>Cookies and Cream</h5>
-                                <h6 class='product-category'>Cakes</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='col-lg-12 d-flex justify-content-center'>
-                        <div class='products-item '>
-                            <div class='product-image'>
-                                <img class='img-fluid' src="{% static 'images/Minnie-cream-b.jpg' %}" style='height:250px; width: 300px'>
-                                <div class='overlay d-flex'>
-                                    <a href="#" class='btn mybtn1'>Add to Cart</a>
-                                </div>
-                            </div>
-                            
-                            <div class='product-content'>
-                                <div class='product-price'>
-                                    <span class='new-price'>NGN 4500</span>
-                                    <span class='old-price'>NGN 5000</span>
-                                </div>
-                                <h5 class='product-name'>Minnie Cake</h5>
-                                <h6 class='product-category'>Cakes</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='col-lg-12 d-flex justify-content-center'>
-                        <div class='products-item '>
-                            <div class='product-image '>
-                                <img class='img-fluid' src=" {% static 'images/croissant.webp' %}" style='height:250px; width: 300px'>
-                                <div class='overlay d-flex'>
-                                    <a href="#" class='btn mybtn1'>Add to Cart</a>
-                                </div>
-                            </div>
-                            
-                            <div class='product-content'>
-                                <div class='product-price'>
-                                    <span class='new-price'>NGN 2000</span>
-                                    <span class='old-price'>NGN 2500</span>
-                                </div>
-                                <h5 class='product-name'>Croissants</h5>
-                                <h6 class='product-category'>Pastries</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class='col-lg-12 d-flex justify-content-center'>
-                        <div class='products-item '>
-                            <div class='product-image '>
-                                <img class='img-fluid' src=" {% static 'images/burger-home.jpg.webp' %}" style='height:250px; width: 300px'>
-                                <div class='overlay d-flex'>
-                                    <a href="#" class='btn mybtn1'>Add to Cart</a>
-                                </div>
-                            </div>
-                            
-                            <div class='product-content'>
-                                <div class='product-price'>
-                                    <span class='new-price'>NGN 1500</span>
-                                    <span class='old-price'>NGN 1750</span>
-                                </div>
-                                <h5 class='product-name'>Veggie Burgers</h5>
-                                <h6 class='product-category'>Pastries</h6>
-                            </div>
-                        </div>
-                    </div>
+                        
+                    {% endfor %}
+                   
                 </div>
             </div>
 
@@ -429,9 +361,10 @@
             </div>
             <div class='row justify-content-center'>
                 <div class='col-md-10 col-lg-7'>
-                    <form class='newsletter-form'>
+                    <form class='newsletter-form' method="POST" action="{% url 'subscribe' %}">
+                        {% csrf_token %}
                         <div class='form-group'>
-                            <input type='text' class='form-control' placeholder="Enter Your Email">
+                            {{email_form.email}}
                         </div>
                         <button type='submit' class='btn mybtn2'>
                             <span>Subscribe</span>
@@ -454,30 +387,31 @@
             </div>
             <div class='row'>
                 <div class='col-md-7'>
-                   <form class='contact-form'>
+                   <form class='contact-form' method="POST" action="{% url 'feedback' %}">
+                       {% csrf_token %}
                         <div class='row'>
                             <div class='col-md-6'>
                                 <div class='form-group'>
-                                    <input type="text" placeholder="Your Name" class='form-control'>
+                                    {{feedback_form.name}}
                                 </div>
                             </div>
                             <div class='col-md-6'>
                                 <div class='form-group'>
-                                    <input type="text" placeholder="Your Email" class='form-control'>
+                                    {{feedback_form.email}}
                                 </div>
                             </div>
                         </div>
                         <div class='row'>
                             <div class='col-md-12'>
                                 <div class='form-group'>
-                                    <input type="text" placeholder="Subject" class='form-control'>
+                                    {{feedback_form.subject}}
                                 </div>
                             </div>
                         </div>
                         <div class='row'>
                             <div class='col-md-12'>
                                 <div class='form-group'>
-                                    <textarea class='form-control' placeholder="Message"></textarea>
+                                    {{feedback_form.message}}
                                 </div>
                             </div>
                         </div>

@@ -15,7 +15,7 @@ from django.template.loader import get_template
 from xhtml2pdf import pisa
 from .utils import cookieCart, cartData, guestOrder, render_to_pdf
 from django.template.loader import get_template
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, EmailSubForm, FeedbackForm
 
 # Create your views here.
 
@@ -23,9 +23,11 @@ from .forms import UserRegistrationForm
 def home(request):
     data = cartData(request)
     cartItems = data['cartItems']
-    
-        
-    context = {'cartItems':cartItems}
+    email_form = EmailSubForm()
+    feedback_form = FeedbackForm()
+    products = Product.objects.all().order_by('-quantity_available')
+    products = products[:7]  
+    context = {'cartItems':cartItems,'products':products,'email_form':email_form,'feedback_form':feedback_form}
     return render(request, 'index.html', context)
 
 def shop(request, category_slug=None):
@@ -65,7 +67,9 @@ def product_detail(request, category_slug, slug):
     
     items = data['items']
     product = Product.objects.get(slug=slug)
-    context = {'product':product,'cartItems':cartItems,'items':items}    
+    category = product.category
+    products = Product.objects.all().filter(category=category)
+    context = {'product':product,'cartItems':cartItems,'items':items,'products':products}    
     return render(request,'product.html', context)
 
 def cart(request):
@@ -127,7 +131,7 @@ def processOrder(request):
     if request.user.is_authenticated:
         customer = Customer.objects.get(user=request.user)
         cart, created = Cart.objects.get_or_create(customer=customer, complete=False)
-        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        order, created = Order.objects.get_or_create(customer=customer, paid=False)
         for item in cart.cartitem_set.all():
             product = Product.objects.get(id=item.product.id)
             orderItem = OrderItem.objects.create(
@@ -237,3 +241,44 @@ def register(request):
         context = {'user_form':user_form}
         return render(request, 'registration/register.html', context)
             
+def email_subscribe(request):
+    if request.method == 'POST':
+        email_form = EmailSubForm(request.POST)
+        if email_form.is_valid():
+            print(email_form.cleaned_data['email'])
+            new_email = email_form.cleaned_data['email']
+            new_subscription = EmailSubscription.objects.create(email=new_email)
+            
+            new_subscription.save()
+            
+               
+
+        else:
+            print('Errors: ', email_form.errors)
+            
+    return redirect('home')
+
+
+
+def feedback(request):
+    
+    if request.method == 'POST':
+        feedback_form = FeedbackForm(request.POST)
+        if feedback_form.is_valid():
+            print(feedback_form.cleaned_data['message'])
+            new_name = feedback_form.cleaned_data['name']
+            new_email = feedback_form.cleaned_data['email']
+            new_subject = feedback_form.cleaned_data['subject']
+            new_message = feedback_form.cleaned_data['message']
+            new_feedback = Feedback.objects.create(name=new_name,email=new_email,subject=new_subject, message=new_message)
+            
+            new_feedback.save()
+            
+               
+
+        else:
+            print('Errors: ', feedback_form.errors)
+            
+    return redirect('home')
+
+

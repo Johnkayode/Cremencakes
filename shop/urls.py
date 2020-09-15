@@ -18,7 +18,8 @@ urlpatterns = [
     path('myadmin/shop/order/<int:order_id>/detail', views.admin_order_detail, name='admin_order_detail'),
     path('myadmin/shop/order/<int:order_id>/pdf', views.admin_order_pdf, name='admin_order_pdf'),
     path('account/register', views.register, name='register'),
-
+    path('subscription/', views.email_subscribe, name='subscribe'),
+     path('feedback/', views.feedback, name='feedback')
 ]
 
 

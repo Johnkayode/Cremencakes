@@ -54,10 +54,17 @@
                             <li class='nav-item'>
                                 <a class='nav-link {% if url_name == "register" %} active {% endif %}' href="{% url 'register'%}">Sign Up</a>
                             </li>
+
                         {% else %}
                             <li class='nav-item'>
                                 <a class='nav-link {% if url_name == "orders" %} active {% endif %}' href="{% url 'orders'%}">Orders</a>
                             </li>
+                            
+                            {% if request.user.is_staff %}
+                            <li class='nav-item'>
+                                <a class='nav-link {% if url_name == "" %} active {% endif %}' href="/myadmin">Admin Dashboard</a>
+                            </li>
+                            {% endif %}
                             <li class='nav-item'>
                                 <a class='nav-link {% if url_name == "" %} active {% endif %}' href="{% url 'logout'%}">Logout</a>
                             </li>

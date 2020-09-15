@@ -85,10 +85,14 @@ class CustomerAdmin(admin.ModelAdmin):
     list_display = ('name','email')
     inlines = (OrderInline, ShippingAddressInline)
 
-
-
-
- 
+@admin.register(EmailSubscription)
+class EmailSubscriptionAdmin(admin.ModelAdmin):
+    list_display = ('email',)
+   
+@admin.register(Feedback)
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ('name','email','subject',)
+    
 
 
 

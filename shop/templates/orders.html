@@ -13,7 +13,7 @@
                         <ul class='list-group'>
                         {% if orders  %}
                             {% for order in orders %}
-                                {% if order.complete is True %}
+                                {% if order.paid is True %}
                                     <li class='list-group-item shadow-lg'>
                                         <p>Transaction ID: {{order.transaction_id}}</p>
                                         <p>Date ordered: {{order.date_ordered}}</p>

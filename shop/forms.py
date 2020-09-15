@@ -19,3 +19,12 @@ class UserRegistrationForm(forms.ModelForm):
         'last_name':TextInput(attrs={'class':'form-control-lg pass', 'placeholder':'Last Name', 'required':'required'}),
         'email': EmailInput(attrs={'class':'form-control-lg pass', 'placeholder':'Email', 'required':'required'}),}
 
+class EmailSubForm(forms.Form):
+    email = forms.CharField(widget=forms.EmailInput(attrs={'class':'form-control','placeholder':'Enter your email', 'required':'required'}))
+
+
+class FeedbackForm(forms.Form):
+    name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Your Name', 'required':'required'}))
+    email = forms.CharField(widget=forms.EmailInput(attrs={'class':'form-control','placeholder':'Your Email', 'required':'required'}))
+    subject = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Subject', 'required':'required'}))
+    message = forms.CharField(widget=forms.Textarea(attrs={'class':'form-control', 'placeholder':'Message', 'required':'required'}))
