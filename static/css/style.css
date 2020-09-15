@@ -4,15 +4,6 @@
     box-sizing: border-box;
 }
 
-@font-face {
-    font-family: "TheGwatmey";
-    src: url('textfonts/TheGwathmey.woff') format('woff');
-}
-
-@font-face {
-    font-family: "EBGaramondItalic";
-    src: url('textfonts/EBGaramond-Italic.woff') format('woff');
-}
 
 html {
     font-size: 10px;
