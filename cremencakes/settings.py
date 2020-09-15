@@ -81,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'CremencakesDB',
-        'USER': 'postgres',
-        'PASSWORD': 'kayode2002',
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
         'HOST': 'localhost'
     }
 }
@@ -143,8 +143,8 @@ LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'cremencakesbakery@gmail.com'
-EMAIL_HOST_PASSWORD = 'kayode2002'
+EMAIL_HOST_USER=os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True 
 
